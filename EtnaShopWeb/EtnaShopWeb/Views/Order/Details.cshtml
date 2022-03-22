@@ -1,0 +1,54 @@
+﻿@using EtnaShop.Models;
+@model IEnumerable<ShoppingCart>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Orden: @ViewBag.OrderId.ToString()</h2>
+        </div> 
+        </div>
+    <br/><br/>
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Cantidad / Precio</th>
+      <th scope="col">Subtotal </th>
+    </tr>
+  </thead>
+    <tbody>
+            @{
+                int i = 0;
+                @foreach(var obj in Model)
+                 {
+                    <tr class="table-active">
+                        <td width=50%>
+                            @obj.Product.Name
+                        </td>
+                        <td width=30%>
+                            @obj.Count&nbsp;x&nbsp;$@obj.Product.Price
+                        </td>
+                        <td width=10%>
+                            @ViewBag.SubTotals[i++].ToString("c")
+                        </td>
+                    </tr>
+                 }
+            }
+                
+      </tbody>
+</table>
+<hr />
+<div class="col-12 text-end">
+    <h2><strong class="text-info">Total:&nbsp;@ViewBag.Total.ToString("c")</strong></h2>
+</div>
+<br/>
+<div class="col-12 text-end">
+    <a asp-controller="Order" asp-action="Index" class="btn btn-secondary"  style="width:180px">
+            Volver
+        </a>
+</div>
+</div>

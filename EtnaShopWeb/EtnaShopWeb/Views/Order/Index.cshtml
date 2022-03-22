@@ -1,0 +1,48 @@
+﻿@using EtnaShop.Models;
+@model IEnumerable<ShoppingCart>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Lista de Ordenes</h2>
+        </div> 
+        
+    </div>
+    <br/><br/>
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nro de Orden</th>
+      </tr>
+  </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr class="table-active">
+                <td scope="row" width=50%>
+                   <strong>@obj.OrderId</strong>
+                </td>
+                <td>
+                    <div class="text-end" role="group">
+                        <a asp-controller="Order" asp-action="Details" asp-route-orderId="@obj.OrderId" asp-route-close="true" class="btn btn-primary">
+                            Ver Detalles
+                        </a>
+                        
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br/>
+<div class="col-12 text-end">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary"  style="width:180px">
+            Volver
+        </a>
+</div>
+</div>

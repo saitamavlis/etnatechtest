@@ -1,0 +1,60 @@
+﻿@using EtnaShop.Models;
+@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Lista de Productos</h2>
+        </div>
+
+    </div>
+    <br /><br />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr class="table-active">
+                    <td scope="row" width=30%>
+                        @obj.Name
+                    </td>
+                    <td width=50%>
+                        @obj.Description
+                    </td>
+                    <td width=10%>
+                        $@obj.Price
+                    </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            
+                            <a asp-controller="ShoppingCart" asp-action="Details" asp-route-productId="@obj.Id" class="btn btn-success">
+                                 <i class="bi bi-cart-plus"></i>Agregar
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="col-12 text-end">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary"  style="width:180px">
+            Volver
+        </a>
+        <a asp-controller="Cart" asp-action="Index" class="btn btn-info"  style="width:180px">
+           <i class="bi bi-cart-fill"></i>&nbsp; Ver Carrito
+        </a>
+</div>
+</div>
+

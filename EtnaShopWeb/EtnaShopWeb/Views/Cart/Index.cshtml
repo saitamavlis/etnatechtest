@@ -1,0 +1,60 @@
+﻿@using EtnaShop.Models;
+@model IEnumerable<ShoppingCart>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Carrito de Compras</h2>
+        </div> 
+        </div>
+    <br/><br/>
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Cantidad / Precio</th>
+      <th scope="col">Subtotal </th>
+    </tr>
+  </thead>
+    <tbody>
+        @foreach(var obj in Model)
+        {
+            <tr class="table-active">
+                <td width=50%>
+                    @obj.Product.Name
+                </td>
+                <td width=30%>
+                    @obj.Count&nbsp;x&nbsp;$@obj.Product.Price
+                </td>
+                <td width=10%>
+                   @ViewBag.SubTotals[0].ToString("c")
+                </td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                       <a asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger">
+                            <i class="bi bi-trash3-fill"></i>Borrar
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+      </tbody>
+</table>
+<hr />
+<div class="col-12 text-end">
+    <h2><strong class="text-info">Total:&nbsp;@ViewBag.Total.ToString("c")</strong></h2>
+</div>
+<br/>
+<div class="col-12 text-end">
+    <a asp-controller="ShoppingCart" asp-action="Index" class="btn btn-secondary"  style="width:180px">
+            Volver
+        </a>
+        <a asp-controller="Cart" asp-action="Details" asp-route-orderId="@ViewBag.OrderId" class="btn btn-warning"  style="width:180px">
+            Finalizar
+        </a>
+</div>
+</div>
